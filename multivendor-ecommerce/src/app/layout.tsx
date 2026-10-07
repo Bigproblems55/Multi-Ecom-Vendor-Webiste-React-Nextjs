@@ -5,6 +5,7 @@ import { Geist, Geist_Mono, Inter,
 
  } from "next/font/google";
 import "./globals.css";
+import { ThemeProvider } from "next-themes";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -63,23 +64,25 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
+      suppressHydrationWarning
       className={`${inter.variable} ${geistMono.variable} ${geistSans.variable}
       ${cormorantGaramond.variable} ${montserrat.variable} ${cinzel.variable} ${cinzelDecorative.variable} ${greatVibes.variable}
       h-full antialiased`
     }
     >
-      <body className="text-5xl min-h-full flex flex-col">{children}
-        <p style={{ fontFamily: "var(--geist-sans)" }}>This line uses geist sans</p>
-        <p style={{ fontFamily: "var(--font-inter)" }}>This line uses Inter</p>
-<p style={{ fontFamily: "var(--font-geist-mono)" }}>This line uses Geist Mono</p>
-        <p style={{ fontFamily: "var(--font-great-vibes)" }}>Our Logo uses Great Vibes</p>
-        <p style={{ fontFamily: "var(--font-cormorant-garamond)" }}>Product Title uses Cormorant Garamond</p>
-        <p style={{ fontFamily: "var(--font-montserrat)" }}>Product Description uses Montserrat</p>
-        <p style={{ fontFamily: "var(--font-cinzel)" }}>New Arrivals uses Cinzel</p>
-        <p style={{ fontFamily: "var(--font-cinzel-decorative)" }}>Price uses Cinzel Decorative $80.31</p>
+      <body className="text-5xl min-h-full flex flex-col">
+       <ThemeProvider
+        attribute="class"
+        defaultTheme="system"
+        enableSystem
+        disableTransitionOnChange
+       >
+        <p style={{ fontFamily: "var(--font-cinzel)" }}>Grand Opening</p> 
         <p className="text-5xl" style={{ fontFamily: "var(--font-cinzel)" }}>Watch Me</p>
         <p style={{ fontFamily: "var(--font-cormorant-garamond)" }}>Sparkle <span style={{ fontFamily: "var(--font-great-vibes)" }}>& Shine</span></p>
-      </body>
+        {children}
+       </ThemeProvider>
+       </body>
     </html>
   );
 }
