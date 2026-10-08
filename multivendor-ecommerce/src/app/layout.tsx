@@ -6,8 +6,7 @@ import { Geist, Geist_Mono, Inter,
  } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "next-themes";
-import type { Metadata } from 'next';
-import { ClerkProvider, Show, SignInButton, SignUpButton, UserButton } from '@clerk/nextjs';
+import { ClerkProvider } from '@clerk/nextjs';
 
  
 const geistSans = Geist({

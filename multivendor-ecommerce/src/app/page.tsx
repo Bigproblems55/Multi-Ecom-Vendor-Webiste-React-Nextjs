@@ -1,10 +1,21 @@
 import ThemeToggle from "@/components/shared/theme-toggle";
 import { Button } from "@/components/ui/button";
-export default function Home() {
+import { UserButton } from "@clerk/nextjs";
+import { auth } from "@clerk/nextjs/server";
+import { redirect } from "next/navigation";
+
+export default async function Home() {
+  const { userId } = await auth();
+
+  if (!userId) {
+    redirect("/sign-up");
+  }
+
   return (
     <div className=" flex flex-col items-center justify-center gap-4">
-      <div className="w-100 flex justify-end">
+      <div className="w-100 flex gap-x-5 justify-end">
         <ThemeToggle />
+        <UserButton />
       </div>
       <h1  className="font-bold font-great-vibes  ">Welcome to the</h1>
               <p className="font-cinzel">Grand</p>
