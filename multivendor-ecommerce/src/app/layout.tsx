@@ -6,7 +6,10 @@ import { Geist, Geist_Mono, Inter,
  } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "next-themes";
+import type { Metadata } from 'next';
+import { ClerkProvider, Show, SignInButton, SignUpButton, UserButton } from '@clerk/nextjs';
 
+ 
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -62,7 +65,8 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html
+    <ClerkProvider>
+      <html
       lang="en"
       suppressHydrationWarning
       className={`${inter.variable} ${geistMono.variable} ${geistSans.variable}
@@ -77,12 +81,11 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         enableSystem
         disableTransitionOnChange
        >
-        <p style={{ fontFamily: "var(--font-cinzel)" }}>Grand Opening</p> 
-        <p className="text-5xl" style={{ fontFamily: "var(--font-cinzel)" }}>Watch Me</p>
-        <p style={{ fontFamily: "var(--font-cormorant-garamond)" }}>Sparkle <span style={{ fontFamily: "var(--font-great-vibes)" }}>& Shine</span></p>
+
         {children}
        </ThemeProvider>
        </body>
     </html>
+    </ClerkProvider>
   );
 }

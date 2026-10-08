@@ -7,9 +7,11 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
 } from "../ui/dropdown-menu";
+import { useTheme } from "next-themes";
 
 
 export default function ThemeToggle() {
+  const {setTheme} = useTheme();
   return (
    <DropdownMenu>
     <DropdownMenuTrigger render={
@@ -27,9 +29,9 @@ export default function ThemeToggle() {
         <span className="sr-only">Toggle theme</span>
    </DropdownMenuTrigger>
    <DropdownMenuContent align="end">
-        <DropdownMenuItem>Light</DropdownMenuItem>
-        <DropdownMenuItem>Dark</DropdownMenuItem>
-        <DropdownMenuItem>System</DropdownMenuItem>
+        <DropdownMenuItem onClick={() => setTheme("light")}>Light</DropdownMenuItem>
+        <DropdownMenuItem onClick={() => setTheme("dark")}>Dark</DropdownMenuItem>
+        <DropdownMenuItem onClick={() => setTheme("system")}>System</DropdownMenuItem>
    </DropdownMenuContent>
    </DropdownMenu>
   );
